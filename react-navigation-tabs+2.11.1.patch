@@ -1,0 +1,1086 @@
+diff --git a/node_modules/react-navigation-tabs/lib/commonjs/views/BottomTabBar.js b/node_modules/react-navigation-tabs/lib/commonjs/views/BottomTabBar.js
+index 899d9e2..526ed52 100644
+--- a/node_modules/react-navigation-tabs/lib/commonjs/views/BottomTabBar.js
++++ b/node_modules/react-navigation-tabs/lib/commonjs/views/BottomTabBar.js
+@@ -1,29 +1,85 @@
+-"use strict";
++'use strict';
+ 
+-Object.defineProperty(exports, "__esModule", {
+-  value: true
++Object.defineProperty(exports, '__esModule', {
++  value: true,
+ });
+ exports.default = void 0;
+ 
+-var React = _interopRequireWildcard(require("react"));
++var React = _interopRequireWildcard(require('react'));
+ 
+-var _reactNative = require("react-native");
++var _reactNative = require('react-native');
+ 
+-var _reactNativeIphoneXHelper = require("react-native-iphone-x-helper");
++var _reactNativeIphoneXHelper = require('react-native-iphone-x-helper');
+ 
+-var _reactNavigation = require("react-navigation");
++var _reactNavigation = require('react-navigation');
+ 
+-var _CrossFadeIcon = _interopRequireDefault(require("./CrossFadeIcon"));
++var _CrossFadeIcon = _interopRequireDefault(require('./CrossFadeIcon'));
+ 
+-var _withDimensions = _interopRequireDefault(require("../utils/withDimensions"));
++var _withDimensions = _interopRequireDefault(
++  require('../utils/withDimensions'),
++);
+ 
+-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
++function _interopRequireDefault(obj) {
++  return obj && obj.__esModule ? obj : { default: obj };
++}
+ 
+-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
++function _getRequireWildcardCache() {
++  if (typeof WeakMap !== 'function') {
++    return null;
++  }
++  var cache = new WeakMap();
++  _getRequireWildcardCache = function () {
++    return cache;
++  };
++  return cache;
++}
+ 
+-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
++function _interopRequireWildcard(obj) {
++  if (obj && obj.__esModule) {
++    return obj;
++  }
++  if (obj === null || (typeof obj !== 'object' && typeof obj !== 'function')) {
++    return { default: obj };
++  }
++  var cache = _getRequireWildcardCache();
++  if (cache && cache.has(obj)) {
++    return cache.get(obj);
++  }
++  var newObj = {};
++  var hasPropertyDescriptor =
++    Object.defineProperty && Object.getOwnPropertyDescriptor;
++  for (var key in obj) {
++    if (Object.prototype.hasOwnProperty.call(obj, key)) {
++      var desc = hasPropertyDescriptor
++        ? Object.getOwnPropertyDescriptor(obj, key)
++        : null;
++      if (desc && (desc.get || desc.set)) {
++        Object.defineProperty(newObj, key, desc);
++      } else {
++        newObj[key] = obj[key];
++      }
++    }
++  }
++  newObj.default = obj;
++  if (cache) {
++    cache.set(obj, newObj);
++  }
++  return newObj;
++}
+ 
+-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
++function _defineProperty(obj, key, value) {
++  if (key in obj) {
++    Object.defineProperty(obj, key, {
++      value: value,
++      enumerable: true,
++      configurable: true,
++      writable: true,
++    });
++  } else {
++    obj[key] = value;
++  }
++  return obj;
++}
+ 
+ const majorVersion = parseInt(_reactNative.Platform.Version, 10);
+ const isIos = _reactNative.Platform.OS === 'ios';
+@@ -36,16 +92,16 @@ const DEFAULT_KEYBOARD_ANIMATION_CONFIG = {
+     animation: 'timing',
+     config: {
+       useNativeDriver: true,
+-      duration: 150
+-    }
++      duration: 150,
++    },
+   },
+   hide: {
+     animation: 'timing',
+     config: {
+       useNativeDriver: true,
+-      duration: 100
+-    }
+-  }
++      duration: 100,
++    },
++  },
+ };
+ 
+ class TouchableWithoutFeedbackWrapper extends React.Component {
+@@ -64,102 +120,105 @@ class TouchableWithoutFeedbackWrapper extends React.Component {
+       accessibilityStates,
+       ...rest
+     } = this.props;
+-    return /*#__PURE__*/React.createElement(_reactNative.TouchableWithoutFeedback, {
+-      onPress: onPress,
+-      onLongPress: onLongPress,
+-      testID: testID,
+-      hitSlop: {
+-        left: 15,
+-        right: 15,
+-        top: 0,
+-        bottom: 5
++    return /*#__PURE__*/ React.createElement(
++      _reactNative.TouchableWithoutFeedback,
++      {
++        onPress: onPress,
++        onLongPress: onLongPress,
++        testID: testID,
++        hitSlop: {
++          left: 15,
++          right: 15,
++          top: 0,
++          bottom: 5,
++        },
++        accessibilityLabel: accessibilityLabel,
++        accessibilityRole: accessibilityRole,
++        accessibilityState: accessibilityState, // @ts-expect-error: support older RN versions
++        accessibilityStates: accessibilityStates,
+       },
+-      accessibilityLabel: accessibilityLabel,
+-      accessibilityRole: accessibilityRole,
+-      accessibilityState: accessibilityState // @ts-expect-error: support older RN versions
+-      ,
+-      accessibilityStates: accessibilityStates
+-    }, /*#__PURE__*/React.createElement(_reactNative.View, rest));
++      /*#__PURE__*/ React.createElement(_reactNative.View, rest),
++    );
+   }
+-
+ }
+ 
+ class TabBarBottom extends React.Component {
+   constructor(...args) {
+     super(...args);
+ 
+-    _defineProperty(this, "state", {
++    _defineProperty(this, 'state', {
+       layout: {
+         height: 0,
+-        width: 0
++        width: 0,
+       },
+       keyboard: false,
+-      visible: new _reactNative.Animated.Value(1)
++      visible: new _reactNative.Animated.Value(1),
+     });
+ 
+-    _defineProperty(this, "context", void 0);
+-
+-    _defineProperty(this, "_getKeyboardAnimationConfigByType", type => {
+-      const {
+-        keyboardHidesTabBarAnimationConfig
+-      } = this.props;
+-      const defaultKeyboardAnimationConfig = DEFAULT_KEYBOARD_ANIMATION_CONFIG[type];
+-      const keyboardAnimationConfig = (keyboardHidesTabBarAnimationConfig === null || keyboardHidesTabBarAnimationConfig === void 0 ? void 0 : keyboardHidesTabBarAnimationConfig[type]) || defaultKeyboardAnimationConfig; // merge config only `timing` animation
+-
+-      if (keyboardAnimationConfig && keyboardAnimationConfig.animation === 'timing') {
+-        return { ...defaultKeyboardAnimationConfig,
++    _defineProperty(this, 'context', void 0);
++
++    _defineProperty(this, '_getKeyboardAnimationConfigByType', (type) => {
++      const { keyboardHidesTabBarAnimationConfig } = this.props;
++      const defaultKeyboardAnimationConfig =
++        DEFAULT_KEYBOARD_ANIMATION_CONFIG[type];
++      const keyboardAnimationConfig =
++        (keyboardHidesTabBarAnimationConfig === null ||
++        keyboardHidesTabBarAnimationConfig === void 0
++          ? void 0
++          : keyboardHidesTabBarAnimationConfig[type]) ||
++        defaultKeyboardAnimationConfig; // merge config only `timing` animation
++
++      if (
++        keyboardAnimationConfig &&
++        keyboardAnimationConfig.animation === 'timing'
++      ) {
++        return {
++          ...defaultKeyboardAnimationConfig,
+           ...keyboardAnimationConfig,
+-          config: { ...defaultKeyboardAnimationConfig.config,
+-            ...keyboardAnimationConfig.config
+-          }
++          config: {
++            ...defaultKeyboardAnimationConfig.config,
++            ...keyboardAnimationConfig.config,
++          },
+         };
+       }
+ 
+       return keyboardAnimationConfig;
+     });
+ 
+-    _defineProperty(this, "_handleKeyboardShow", () => {
+-      this.setState({
+-        keyboard: true
+-      }, () => {
+-        const {
+-          animation,
+-          config
+-        } = this._getKeyboardAnimationConfigByType('show'); // @ts-expect-error
+-
+-
+-        _reactNative.Animated[animation](this.state.visible, {
+-          toValue: 0,
+-          ...config
+-        }).start();
+-      });
++    _defineProperty(this, '_handleKeyboardShow', () => {
++      this.setState(
++        {
++          keyboard: true,
++        },
++        () => {
++          const { animation, config } =
++            this._getKeyboardAnimationConfigByType('show'); // @ts-expect-error
++
++          _reactNative.Animated[animation](this.state.visible, {
++            toValue: 0,
++            ...config,
++          }).start();
++        },
++      );
+     });
+ 
+-    _defineProperty(this, "_handleKeyboardHide", () => {
+-      const {
+-        animation,
+-        config
+-      } = this._getKeyboardAnimationConfigByType('hide'); // @ts-expect-error
+-
++    _defineProperty(this, '_handleKeyboardHide', () => {
++      const { animation, config } =
++        this._getKeyboardAnimationConfigByType('hide'); // @ts-expect-error
+ 
+       _reactNative.Animated[animation](this.state.visible, {
+         toValue: 1,
+-        ...config
++        ...config,
+       }).start(() => {
+         this.setState({
+-          keyboard: false
++          keyboard: false,
+         });
+       });
+     });
+ 
+-    _defineProperty(this, "_handleLayout", e => {
+-      const {
+-        layout
+-      } = this.state;
+-      const {
+-        height,
+-        width
+-      } = e.nativeEvent.layout;
++    _defineProperty(this, '_handleLayout', (e) => {
++      const { layout } = this.state;
++      const { height, width } = e.nativeEvent.layout;
+ 
+       if (height === layout.height && width === layout.width) {
+         return;
+@@ -168,15 +227,13 @@ class TabBarBottom extends React.Component {
+       this.setState({
+         layout: {
+           height,
+-          width
+-        }
++          width,
++        },
+       });
+     });
+ 
+-    _defineProperty(this, "_getActiveTintColor", () => {
+-      let {
+-        activeTintColor
+-      } = this.props;
++    _defineProperty(this, '_getActiveTintColor', () => {
++      let { activeTintColor } = this.props;
+ 
+       if (!activeTintColor) {
+         return;
+@@ -187,10 +244,8 @@ class TabBarBottom extends React.Component {
+       return activeTintColor[this.context];
+     });
+ 
+-    _defineProperty(this, "_getInactiveTintColor", () => {
+-      let {
+-        inactiveTintColor
+-      } = this.props;
++    _defineProperty(this, '_getInactiveTintColor', () => {
++      let { inactiveTintColor } = this.props;
+ 
+       if (!inactiveTintColor) {
+         return;
+@@ -201,10 +256,8 @@ class TabBarBottom extends React.Component {
+       return inactiveTintColor[this.context];
+     });
+ 
+-    _defineProperty(this, "_getActiveBackgroundColor", () => {
+-      let {
+-        activeBackgroundColor
+-      } = this.props;
++    _defineProperty(this, '_getActiveBackgroundColor', () => {
++      let { activeBackgroundColor } = this.props;
+ 
+       if (!activeBackgroundColor) {
+         return;
+@@ -215,10 +268,8 @@ class TabBarBottom extends React.Component {
+       return activeBackgroundColor[this.context];
+     });
+ 
+-    _defineProperty(this, "_getInactiveBackgroundColor", () => {
+-      let {
+-        inactiveBackgroundColor
+-      } = this.props;
++    _defineProperty(this, '_getInactiveBackgroundColor', () => {
++      let { inactiveBackgroundColor } = this.props;
+ 
+       if (!inactiveBackgroundColor) {
+         return;
+@@ -229,16 +280,8 @@ class TabBarBottom extends React.Component {
+       return inactiveBackgroundColor[this.context];
+     });
+ 
+-    _defineProperty(this, "_renderLabel", ({
+-      route,
+-      focused
+-    }) => {
+-      const {
+-        labelStyle,
+-        showLabel,
+-        showIcon,
+-        allowFontScaling
+-      } = this.props;
++    _defineProperty(this, '_renderLabel', ({ route, focused }) => {
++      const { labelStyle, showLabel, showIcon, allowFontScaling } = this.props;
+ 
+       if (showLabel === false) {
+         return null;
+@@ -249,42 +292,44 @@ class TabBarBottom extends React.Component {
+       const inactiveTintColor = this._getInactiveTintColor();
+ 
+       const label = this.props.getLabelText({
+-        route
++        route,
+       });
+       const tintColor = focused ? activeTintColor : inactiveTintColor;
+ 
+       const horizontal = this._shouldUseHorizontalLabels();
+ 
+       if (typeof label === 'string') {
+-        return /*#__PURE__*/React.createElement(_reactNative.Animated.Text, {
+-          numberOfLines: 1,
+-          style: [styles.label, {
+-            color: tintColor
+-          }, showIcon && horizontal ? styles.labelBeside : styles.labelBeneath, labelStyle],
+-          allowFontScaling: allowFontScaling
+-        }, label);
++        return /*#__PURE__*/ React.createElement(
++          _reactNative.Animated.Text,
++          {
++            numberOfLines: 1,
++            style: [
++              styles.label,
++              {
++                color: tintColor,
++              },
++              showIcon && horizontal ? styles.labelBeside : styles.labelBeneath,
++              labelStyle,
++            ],
++            allowFontScaling: allowFontScaling,
++          },
++          label,
++        );
+       }
+ 
+       if (typeof label === 'function') {
+         return label({
+           focused,
+           tintColor,
+-          orientation: horizontal ? 'horizontal' : 'vertical'
++          orientation: horizontal ? 'horizontal' : 'vertical',
+         });
+       }
+ 
+       return label;
+     });
+ 
+-    _defineProperty(this, "_renderIcon", ({
+-      route,
+-      focused
+-    }) => {
+-      const {
+-        renderIcon,
+-        showIcon,
+-        showLabel
+-      } = this.props;
++    _defineProperty(this, '_renderIcon', ({ route, focused }) => {
++      const { renderIcon, showIcon, showLabel } = this.props;
+ 
+       if (showIcon === false) {
+         return null;
+@@ -298,7 +343,7 @@ class TabBarBottom extends React.Component {
+ 
+       const activeOpacity = focused ? 1 : 0;
+       const inactiveOpacity = focused ? 0 : 1;
+-      return /*#__PURE__*/React.createElement(_CrossFadeIcon.default, {
++      return /*#__PURE__*/ React.createElement(_CrossFadeIcon.default, {
+         route: route,
+         horizontal: horizontal,
+         activeOpacity: activeOpacity,
+@@ -306,21 +351,18 @@ class TabBarBottom extends React.Component {
+         activeTintColor: activeTintColor,
+         inactiveTintColor: inactiveTintColor,
+         renderIcon: renderIcon,
+-        style: [styles.iconWithExplicitHeight, showLabel === false && !horizontal && styles.iconWithoutLabel, showLabel !== false && !horizontal && styles.iconWithLabel]
++        style: [
++          styles.iconWithExplicitHeight,
++          showLabel === false && !horizontal && styles.iconWithoutLabel,
++          showLabel !== false && !horizontal && styles.iconWithLabel,
++        ],
+       });
+     });
+ 
+-    _defineProperty(this, "_shouldUseHorizontalLabels", () => {
+-      const {
+-        routes
+-      } = this.props.navigation.state;
+-      const {
+-        isLandscape,
+-        dimensions,
+-        adaptive,
+-        tabStyle,
+-        labelPosition
+-      } = this.props;
++    _defineProperty(this, '_shouldUseHorizontalLabels', () => {
++      const { routes } = this.props.navigation.state;
++      const { isLandscape, dimensions, adaptive, tabStyle, labelPosition } =
++        this.props;
+ 
+       if (labelPosition) {
+         let position;
+@@ -329,7 +371,7 @@ class TabBarBottom extends React.Component {
+           position = labelPosition;
+         } else {
+           position = labelPosition({
+-            deviceOrientation: isLandscape ? 'horizontal' : 'vertical'
++            deviceOrientation: isLandscape ? 'horizontal' : 'vertical',
+           });
+         }
+ 
+@@ -342,7 +384,6 @@ class TabBarBottom extends React.Component {
+         return false;
+       } // @ts-ignore
+ 
+-
+       if (_reactNative.Platform.isPad) {
+         let maxTabItemWidth = DEFAULT_MAX_TAB_ITEM_WIDTH;
+ 
+@@ -364,29 +405,41 @@ class TabBarBottom extends React.Component {
+   }
+ 
+   componentDidMount() {
++    this.offs = [];
+     if (_reactNative.Platform.OS === 'ios') {
+-      _reactNative.Keyboard.addListener('keyboardWillShow', this._handleKeyboardShow);
+-
+-      _reactNative.Keyboard.addListener('keyboardWillHide', this._handleKeyboardHide);
++      this.offs.push(
++        _reactNative.Keyboard.addListener(
++          'keyboardWillShow',
++          this._handleKeyboardShow,
++        ).remove,
++      );
++
++      this.offs.push(
++        _reactNative.Keyboard.addListener(
++          'keyboardWillHide',
++          this._handleKeyboardHide,
++        ).remove,
++      );
+     } else {
+-      _reactNative.Keyboard.addListener('keyboardDidShow', this._handleKeyboardShow);
+-
+-      _reactNative.Keyboard.addListener('keyboardDidHide', this._handleKeyboardHide);
++      this.offs.push(
++        _reactNative.Keyboard.addListener(
++          'keyboardDidShow',
++          this._handleKeyboardShow,
++        ).remove,
++      );
++
++      this.offs.push(
++        _reactNative.Keyboard.addListener(
++          'keyboardDidHide',
++          this._handleKeyboardHide,
++        ).remove,
++      );
+     }
+   }
+ 
+   componentWillUnmount() {
+-    if (_reactNative.Platform.OS === 'ios') {
+-      _reactNative.Keyboard.removeListener('keyboardWillShow', this._handleKeyboardShow);
+-
+-      _reactNative.Keyboard.removeListener('keyboardWillHide', this._handleKeyboardHide);
+-    } else {
+-      _reactNative.Keyboard.removeListener('keyboardDidShow', this._handleKeyboardShow);
+-
+-      _reactNative.Keyboard.removeListener('keyboardDidHide', this._handleKeyboardHide);
+-    }
+-  } // @ts-ignore
+-
++    this.offs.forEach((off) => off());
++  }
+ 
+   render() {
+     const {
+@@ -397,11 +450,9 @@ class TabBarBottom extends React.Component {
+       isLandscape,
+       safeAreaInset,
+       style,
+-      tabStyle
++      tabStyle,
+     } = this.props;
+-    const {
+-      routes
+-    } = navigation.state;
++    const { routes } = navigation.state;
+     const isDark = this.context === 'dark';
+ 
+     const activeBackgroundColor = this._getActiveBackgroundColor();
+@@ -437,92 +488,165 @@ class TabBarBottom extends React.Component {
+       marginBottom,
+       marginRight,
+       marginHorizontal,
+-      marginVertical
++      marginVertical,
+     };
+-    const statusBarHeight = (0, _reactNativeIphoneXHelper.getStatusBarHeight)(true);
++    const statusBarHeight = (0, _reactNativeIphoneXHelper.getStatusBarHeight)(
++      true,
++    );
+     const horizontalInset = isLandscape ? statusBarHeight : 0;
+     const insets = {
+-      bottom: typeof (safeAreaInset === null || safeAreaInset === void 0 ? void 0 : safeAreaInset.bottom) === 'number' ? safeAreaInset.bottom : (safeAreaInset === null || safeAreaInset === void 0 ? void 0 : safeAreaInset.bottom) === 'never' ? 0 : (0, _reactNativeIphoneXHelper.getBottomSpace)(),
+-      left: typeof (safeAreaInset === null || safeAreaInset === void 0 ? void 0 : safeAreaInset.left) === 'number' ? safeAreaInset.left : (safeAreaInset === null || safeAreaInset === void 0 ? void 0 : safeAreaInset.left) === 'never' ? 0 : horizontalInset,
+-      right: typeof (safeAreaInset === null || safeAreaInset === void 0 ? void 0 : safeAreaInset.right) === 'number' ? safeAreaInset.right : (safeAreaInset === null || safeAreaInset === void 0 ? void 0 : safeAreaInset.right) === 'never' ? 0 : horizontalInset
++      bottom:
++        typeof (safeAreaInset === null || safeAreaInset === void 0
++          ? void 0
++          : safeAreaInset.bottom) === 'number'
++          ? safeAreaInset.bottom
++          : (safeAreaInset === null || safeAreaInset === void 0
++              ? void 0
++              : safeAreaInset.bottom) === 'never'
++          ? 0
++          : (0, _reactNativeIphoneXHelper.getBottomSpace)(),
++      left:
++        typeof (safeAreaInset === null || safeAreaInset === void 0
++          ? void 0
++          : safeAreaInset.left) === 'number'
++          ? safeAreaInset.left
++          : (safeAreaInset === null || safeAreaInset === void 0
++              ? void 0
++              : safeAreaInset.left) === 'never'
++          ? 0
++          : horizontalInset,
++      right:
++        typeof (safeAreaInset === null || safeAreaInset === void 0
++          ? void 0
++          : safeAreaInset.right) === 'number'
++          ? safeAreaInset.right
++          : (safeAreaInset === null || safeAreaInset === void 0
++              ? void 0
++              : safeAreaInset.right) === 'never'
++          ? 0
++          : horizontalInset,
+     };
+-    const tabBarStyle = [{
+-      height: height != null ? typeof height === 'number' ? height + insets.bottom : height : // @ts-ignore: isPad exists in runtime but not available in type defs
+-      (this._shouldUseHorizontalLabels() && !_reactNative.Platform.isPad ? COMPACT_HEIGHT : DEFAULT_HEIGHT) + insets.bottom,
+-      paddingBottom: insets.bottom,
+-      paddingLeft: insets.left,
+-      paddingRight: insets.right
+-    }, styles.tabBar, isDark ? styles.tabBarDark : styles.tabBarLight, innerStyle];
+-    return /*#__PURE__*/React.createElement(_reactNative.Animated.View, {
+-      style: [styles.container, containerStyle, keyboardHidesTabBar ? {
+-        // When the keyboard is shown, slide down the tab bar
+-        transform: [{
+-          translateY: this.state.visible.interpolate({
+-            inputRange: [0, 1],
+-            outputRange: [this.state.layout.height, 0]
+-          })
+-        }],
+-        // Absolutely position the tab bar so that the content is below it
+-        // This is needed to avoid gap at bottom when the tab bar is hidden
+-        position: this.state.keyboard ? 'absolute' : position
+-      } : null],
+-      pointerEvents: keyboardHidesTabBar && this.state.keyboard ? 'none' : 'auto',
+-      onLayout: this._handleLayout
+-    }, /*#__PURE__*/React.createElement(_reactNative.View, {
+-      style: tabBarStyle
+-    }, routes.map((route, index) => {
+-      const focused = index === navigation.state.index;
+-      const scene = {
+-        route,
+-        focused
+-      };
+-      const accessibilityLabel = this.props.getAccessibilityLabel({
+-        route
+-      });
+-      const accessibilityRole = this.props.getAccessibilityRole({
+-        route
+-      });
+-      const accessibilityStates = this.props.getAccessibilityStates(scene);
+-      const testID = this.props.getTestID({
+-        route
+-      });
+-      const backgroundColor = focused ? activeBackgroundColor : inactiveBackgroundColor;
+-      const ButtonComponent = this.props.getButtonComponent({
+-        route
+-      }) || TouchableWithoutFeedbackWrapper;
+-      return /*#__PURE__*/React.createElement(ButtonComponent, {
+-        key: route.key,
+-        route: route,
+-        focused: focused,
+-        onPress: () => onTabPress({
+-          route
+-        }),
+-        onLongPress: () => onTabLongPress({
+-          route
++    const tabBarStyle = [
++      {
++        height:
++          height != null
++            ? typeof height === 'number'
++              ? height + insets.bottom
++              : height // @ts-ignore: isPad exists in runtime but not available in type defs
++            : (this._shouldUseHorizontalLabels() && !_reactNative.Platform.isPad
++                ? COMPACT_HEIGHT
++                : DEFAULT_HEIGHT) + insets.bottom,
++        paddingBottom: insets.bottom,
++        paddingLeft: insets.left,
++        paddingRight: insets.right,
++      },
++      styles.tabBar,
++      isDark ? styles.tabBarDark : styles.tabBarLight,
++      innerStyle,
++    ];
++    return /*#__PURE__*/ React.createElement(
++      _reactNative.Animated.View,
++      {
++        style: [
++          styles.container,
++          containerStyle,
++          keyboardHidesTabBar
++            ? {
++                // When the keyboard is shown, slide down the tab bar
++                transform: [
++                  {
++                    translateY: this.state.visible.interpolate({
++                      inputRange: [0, 1],
++                      outputRange: [this.state.layout.height, 0],
++                    }),
++                  },
++                ],
++                // Absolutely position the tab bar so that the content is below it
++                // This is needed to avoid gap at bottom when the tab bar is hidden
++                position: this.state.keyboard ? 'absolute' : position,
++              }
++            : null,
++        ],
++        pointerEvents:
++          keyboardHidesTabBar && this.state.keyboard ? 'none' : 'auto',
++        onLayout: this._handleLayout,
++      },
++      /*#__PURE__*/ React.createElement(
++        _reactNative.View,
++        {
++          style: tabBarStyle,
++        },
++        routes.map((route, index) => {
++          const focused = index === navigation.state.index;
++          const scene = {
++            route,
++            focused,
++          };
++          const accessibilityLabel = this.props.getAccessibilityLabel({
++            route,
++          });
++          const accessibilityRole = this.props.getAccessibilityRole({
++            route,
++          });
++          const accessibilityStates = this.props.getAccessibilityStates(scene);
++          const testID = this.props.getTestID({
++            route,
++          });
++          const backgroundColor = focused
++            ? activeBackgroundColor
++            : inactiveBackgroundColor;
++          const ButtonComponent =
++            this.props.getButtonComponent({
++              route,
++            }) || TouchableWithoutFeedbackWrapper;
++          return /*#__PURE__*/ React.createElement(
++            ButtonComponent,
++            {
++              key: route.key,
++              route: route,
++              focused: focused,
++              onPress: () =>
++                onTabPress({
++                  route,
++                }),
++              onLongPress: () =>
++                onTabLongPress({
++                  route,
++                }),
++              testID: testID,
++              accessibilityLabel: accessibilityLabel,
++              accessibilityRole: accessibilityRole,
++              accessibilityStates: accessibilityStates,
++              style: [
++                styles.tab,
++                {
++                  backgroundColor,
++                },
++                this._shouldUseHorizontalLabels()
++                  ? styles.tabLandscape
++                  : styles.tabPortrait,
++                tabStyle,
++              ],
++            },
++            this._renderIcon(scene),
++            this._renderLabel(scene),
++          );
+         }),
+-        testID: testID,
+-        accessibilityLabel: accessibilityLabel,
+-        accessibilityRole: accessibilityRole,
+-        accessibilityStates: accessibilityStates,
+-        style: [styles.tab, {
+-          backgroundColor
+-        }, this._shouldUseHorizontalLabels() ? styles.tabLandscape : styles.tabPortrait, tabStyle]
+-      }, this._renderIcon(scene), this._renderLabel(scene));
+-    })));
++      ),
++    );
+   }
+-
+ }
+ 
+-_defineProperty(TabBarBottom, "defaultProps", {
++_defineProperty(TabBarBottom, 'defaultProps', {
+   keyboardHidesTabBar: true,
+   keyboardHidesTabBarAnimationConfig: DEFAULT_KEYBOARD_ANIMATION_CONFIG,
+   activeTintColor: {
+     light: '#007AFF',
+-    dark: '#fff'
++    dark: '#fff',
+   },
+   inactiveTintColor: {
+     light: '#8e8e93',
+-    dark: '#7f7f7f'
++    dark: '#7f7f7f',
+   },
+   activeBackgroundColor: 'transparent',
+   inactiveBackgroundColor: 'transparent',
+@@ -532,62 +656,62 @@ _defineProperty(TabBarBottom, "defaultProps", {
+   adaptive: isIOS11,
+   safeAreaInset: {
+     bottom: 'always',
+-    top: 'never'
+-  }
++    top: 'never',
++  },
+ });
+ 
+-_defineProperty(TabBarBottom, "contextType", _reactNavigation.ThemeContext);
++_defineProperty(TabBarBottom, 'contextType', _reactNavigation.ThemeContext);
+ 
+ const styles = _reactNative.StyleSheet.create({
+   tabBar: {
+     borderTopWidth: _reactNative.StyleSheet.hairlineWidth,
+-    flexDirection: 'row'
++    flexDirection: 'row',
+   },
+   tabBarLight: {
+     backgroundColor: _reactNavigation.ThemeColors.light.header,
+-    borderTopColor: _reactNavigation.ThemeColors.light.headerBorder
++    borderTopColor: _reactNavigation.ThemeColors.light.headerBorder,
+   },
+   tabBarDark: {
+     backgroundColor: _reactNavigation.ThemeColors.dark.header,
+-    borderTopColor: _reactNavigation.ThemeColors.dark.headerBorder
++    borderTopColor: _reactNavigation.ThemeColors.dark.headerBorder,
+   },
+   container: {
+-    elevation: 8
++    elevation: 8,
+   },
+   tab: {
+     flex: 1,
+-    alignItems: isIos ? 'center' : 'stretch'
++    alignItems: isIos ? 'center' : 'stretch',
+   },
+   tabPortrait: {
+     justifyContent: 'flex-end',
+-    flexDirection: 'column'
++    flexDirection: 'column',
+   },
+   tabLandscape: {
+     justifyContent: 'center',
+-    flexDirection: 'row'
++    flexDirection: 'row',
+   },
+   iconWithoutLabel: {
+-    flex: 1
++    flex: 1,
+   },
+   iconWithLabel: {
+-    flex: 1
++    flex: 1,
+   },
+   iconWithExplicitHeight: {
+     // @ts-ignore
+-    height: _reactNative.Platform.isPad ? DEFAULT_HEIGHT : COMPACT_HEIGHT
++    height: _reactNative.Platform.isPad ? DEFAULT_HEIGHT : COMPACT_HEIGHT,
+   },
+   label: {
+     textAlign: 'center',
+-    backgroundColor: 'transparent'
++    backgroundColor: 'transparent',
+   },
+   labelBeneath: {
+     fontSize: 11,
+-    marginBottom: 1.5
++    marginBottom: 1.5,
+   },
+   labelBeside: {
+     fontSize: 12,
+-    marginLeft: 20
+-  }
++    marginLeft: 20,
++  },
+ });
+ 
+ var _default = (0, _withDimensions.default)(TabBarBottom);
+diff --git a/node_modules/react-navigation-tabs/lib/module/views/BottomTabBar.js b/node_modules/react-navigation-tabs/lib/module/views/BottomTabBar.js
+index b913f4e..53c708a 100644
+--- a/node_modules/react-navigation-tabs/lib/module/views/BottomTabBar.js
++++ b/node_modules/react-navigation-tabs/lib/module/views/BottomTabBar.js
+@@ -344,24 +344,21 @@ class TabBarBottom extends React.Component {
+   }
+ 
+   componentDidMount() {
++    this.offs = [];
+     if (Platform.OS === 'ios') {
+-      Keyboard.addListener('keyboardWillShow', this._handleKeyboardShow);
+-      Keyboard.addListener('keyboardWillHide', this._handleKeyboardHide);
++      this.offs.push(
++        Keyboard.addListener('keyboardWillShow', this._handleKeyboardShow).remove
++      )
++      this.offs.push(Keyboard.addListener('keyboardWillHide', this._handleKeyboardHide).remove);
+     } else {
+-      Keyboard.addListener('keyboardDidShow', this._handleKeyboardShow);
+-      Keyboard.addListener('keyboardDidHide', this._handleKeyboardHide);
++      this.offs.push(Keyboard.addListener('keyboardDidShow', this._handleKeyboardShow).remove);
++      this.offs.push(Keyboard.addListener('keyboardDidHide', this._handleKeyboardHide).remove);
+     }
+   }
+ 
+   componentWillUnmount() {
+-    if (Platform.OS === 'ios') {
+-      Keyboard.removeListener('keyboardWillShow', this._handleKeyboardShow);
+-      Keyboard.removeListener('keyboardWillHide', this._handleKeyboardHide);
+-    } else {
+-      Keyboard.removeListener('keyboardDidShow', this._handleKeyboardShow);
+-      Keyboard.removeListener('keyboardDidHide', this._handleKeyboardHide);
+-    }
+-  } // @ts-ignore
++    this.offs.forEach((off) => off());
++  }
+ 
+ 
+   render() {
+diff --git a/node_modules/react-navigation-tabs/src/views/BottomTabBar.tsx b/node_modules/react-navigation-tabs/src/views/BottomTabBar.tsx
+index 6235b4a..ead640f 100644
+--- a/node_modules/react-navigation-tabs/src/views/BottomTabBar.tsx
++++ b/node_modules/react-navigation-tabs/src/views/BottomTabBar.tsx
+@@ -54,9 +54,7 @@ const DEFAULT_KEYBOARD_ANIMATION_CONFIG: KeyboardHidesTabBarAnimationConfig = {
+   },
+ };
+ 
+-class TouchableWithoutFeedbackWrapper extends React.Component<
+-  ButtonComponentProps
+-> {
++class TouchableWithoutFeedbackWrapper extends React.Component<ButtonComponentProps> {
+   render() {
+     const {
+       // eslint-disable-next-line @typescript-eslint/no-unused-vars
+@@ -83,8 +81,7 @@ class TouchableWithoutFeedbackWrapper extends React.Component<
+         accessibilityRole={accessibilityRole}
+         accessibilityState={accessibilityState}
+         // @ts-expect-error: support older RN versions
+-        accessibilityStates={accessibilityStates}
+-      >
++        accessibilityStates={accessibilityStates}>
+         <View {...rest} />
+       </TouchableWithoutFeedback>
+     );
+@@ -92,6 +89,7 @@ class TouchableWithoutFeedbackWrapper extends React.Component<
+ }
+ 
+ class TabBarBottom extends React.Component<BottomTabBarProps, State> {
++  private offs = [];
+   static defaultProps = {
+     keyboardHidesTabBar: true,
+     keyboardHidesTabBarAnimationConfig: DEFAULT_KEYBOARD_ANIMATION_CONFIG,
+@@ -122,30 +120,37 @@ class TabBarBottom extends React.Component<BottomTabBarProps, State> {
+   };
+ 
+   componentDidMount() {
++    this.offs = [];
+     if (Platform.OS === 'ios') {
+-      Keyboard.addListener('keyboardWillShow', this._handleKeyboardShow);
+-      Keyboard.addListener('keyboardWillHide', this._handleKeyboardHide);
++      this.offs.push(
++        Keyboard.addListener('keyboardWillShow', this._handleKeyboardShow)
++          .remove,
++      );
++      this.offs.push(
++        Keyboard.addListener('keyboardWillHide', this._handleKeyboardHide)
++          .remove,
++      );
+     } else {
+-      Keyboard.addListener('keyboardDidShow', this._handleKeyboardShow);
+-      Keyboard.addListener('keyboardDidHide', this._handleKeyboardHide);
++      this.offs.push(
++        Keyboard.addListener('keyboardDidShow', this._handleKeyboardShow)
++          .remove,
++      );
++      this.offs.push(
++        Keyboard.addListener('keyboardDidHide', this._handleKeyboardHide)
++          .remove,
++      );
+     }
+   }
+ 
+   componentWillUnmount() {
+-    if (Platform.OS === 'ios') {
+-      Keyboard.removeListener('keyboardWillShow', this._handleKeyboardShow);
+-      Keyboard.removeListener('keyboardWillHide', this._handleKeyboardHide);
+-    } else {
+-      Keyboard.removeListener('keyboardDidShow', this._handleKeyboardShow);
+-      Keyboard.removeListener('keyboardDidHide', this._handleKeyboardHide);
+-    }
++    this.offs.forEach((off) => off());
+   }
+ 
+   // @ts-ignore
+   context: 'light' | 'dark';
+ 
+   _getKeyboardAnimationConfigByType = (
+-    type: keyof KeyboardHidesTabBarAnimationConfig
++    type: keyof KeyboardHidesTabBarAnimationConfig,
+   ): KeyboardAnimationConfig => {
+     const { keyboardHidesTabBarAnimationConfig } = this.props;
+     const defaultKeyboardAnimationConfig =
+@@ -174,9 +179,8 @@ class TabBarBottom extends React.Component<BottomTabBarProps, State> {
+ 
+   _handleKeyboardShow = () => {
+     this.setState({ keyboard: true }, () => {
+-      const { animation, config } = this._getKeyboardAnimationConfigByType(
+-        'show'
+-      );
++      const { animation, config } =
++        this._getKeyboardAnimationConfigByType('show');
+       // @ts-expect-error
+       Animated[animation](this.state.visible, {
+         toValue: 0,
+@@ -186,9 +190,8 @@ class TabBarBottom extends React.Component<BottomTabBarProps, State> {
+   };
+ 
+   _handleKeyboardHide = () => {
+-    const { animation, config } = this._getKeyboardAnimationConfigByType(
+-      'hide'
+-    );
++    const { animation, config } =
++      this._getKeyboardAnimationConfigByType('hide');
+     // @ts-expect-error
+     Animated[animation](this.state.visible, {
+       toValue: 1,
+@@ -287,8 +290,7 @@ class TabBarBottom extends React.Component<BottomTabBarProps, State> {
+             showIcon && horizontal ? styles.labelBeside : styles.labelBeneath,
+             labelStyle,
+           ]}
+-          allowFontScaling={allowFontScaling}
+-        >
++          allowFontScaling={allowFontScaling}>
+           {label}
+         </Animated.Text>
+       );
+@@ -345,13 +347,8 @@ class TabBarBottom extends React.Component<BottomTabBarProps, State> {
+ 
+   _shouldUseHorizontalLabels = () => {
+     const { routes } = this.props.navigation.state;
+-    const {
+-      isLandscape,
+-      dimensions,
+-      adaptive,
+-      tabStyle,
+-      labelPosition,
+-    } = this.props;
++    const { isLandscape, dimensions, adaptive, tabStyle, labelPosition } =
++      this.props;
+ 
+     if (labelPosition) {
+       let position;
+@@ -510,8 +507,7 @@ class TabBarBottom extends React.Component<BottomTabBarProps, State> {
+         pointerEvents={
+           keyboardHidesTabBar && this.state.keyboard ? 'none' : 'auto'
+         }
+-        onLayout={this._handleLayout}
+-      >
++        onLayout={this._handleLayout}>
+         <View style={tabBarStyle}>
+           {routes.map((route, index) => {
+             const focused = index === navigation.state.index;
+@@ -524,9 +520,8 @@ class TabBarBottom extends React.Component<BottomTabBarProps, State> {
+               route,
+             });
+ 
+-            const accessibilityStates = this.props.getAccessibilityStates(
+-              scene
+-            );
++            const accessibilityStates =
++              this.props.getAccessibilityStates(scene);
+ 
+             const testID = this.props.getTestID({ route });
+ 
+@@ -556,8 +551,7 @@ class TabBarBottom extends React.Component<BottomTabBarProps, State> {
+                     ? styles.tabLandscape
+                     : styles.tabPortrait,
+                   tabStyle,
+-                ]}
+-              >
++                ]}>
+                 {this._renderIcon(scene)}
+                 {this._renderLabel(scene)}
+               </ButtonComponent>
