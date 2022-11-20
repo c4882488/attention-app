@@ -5,7 +5,6 @@ import * as Location from 'expo-location';
 import * as TaskManager from "expo-task-manager";
 import {getFlatternDistance} from '../unit/LonLatTransform';
 import axios from 'axios';
-import datas from "../../assets/Datas/data";
 import kData from "../../assets/Datas/KaohsiungData";
 import {EspToWsg} from "../../src/unit/EpsToWgs";
 import useLocation from "../../src/unit/useLocation";
@@ -14,7 +13,6 @@ import { changeStatus } from "../model/statusSlice";
 import { statusColors } from "../../assets/colors/colors";
 import moment from "moment";
 import "moment-timezone";
-// import moment from "moment-timezone";
 
 export default function App() {
   const dispatch = useDispatch();

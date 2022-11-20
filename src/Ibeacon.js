@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import { useSelector, useDispatch } from "react-redux";
 import { changeStatus } from "./model/statusSlice";
 import { statusColors } from "../assets/colors/colors";
@@ -213,9 +212,8 @@ export default function App() {
         <Text style={styles.paragraph}>change</Text>
       </TouchableOpacity>
       {/* <Ibeacons /> */}
-      <Text>Open up App.js to start working on your app!sss</Text>
+      {/* <Text>Open up App.js to start working on your app!sss</Text> */}
       <Button title="request permissions" onPress={requestPermission} />
-      <StatusBar style="auto" />
     </View>
   );
 }

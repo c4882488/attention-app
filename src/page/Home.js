@@ -7,7 +7,8 @@ import InfoBar from "../component/InfoBar";
 import SlideUpScreen from "../component/SlideUpScreen";
 import TestLocation from "../component/TestLocation"
 import Counter from "../component/TestCounter";
-import Ibeacons from "../ beacon"
+import Ibeacons from "../Ibeacon";
+import MqttCore from "../MqttCore";
 
 export default function App() {
   const statue = useSelector((state) => state.status);
@@ -16,6 +17,7 @@ export default function App() {
       <View style={styles.content}>
         <InfoBar />
         <TestLocation />
+        <MqttCore />
         {/* <Ibeacons /> */}
         {/* <Counter /> */}
         <WarningsCircle statue={statue} />

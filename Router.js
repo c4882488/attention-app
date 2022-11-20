@@ -87,7 +87,7 @@ const Route = () => {
             }}
           />
           {/* 測試 */}
-          <Scene
+          {/* <Scene
             drawer={true}
             key="Test"
             component={Test}
@@ -99,7 +99,7 @@ const Route = () => {
             cardStyle={{
               backgroundColor: "#353945",
             }}
-          />
+          /> */}
         </Stack>
       </Drawer>
 
