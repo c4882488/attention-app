@@ -10,7 +10,7 @@ function MqttCore() {
     const [value, setValue] = useState(0);
 
     function onMessage(message) {
-        console.log(message);
+    // console.log(message);
       if (message.destinationName === "Try/MQTT")
         setValue(message.payloadString);
     }
