@@ -7,6 +7,7 @@ import InfoBar from "../component/InfoBar";
 import SlideUpScreen from "../component/SlideUpScreen";
 import TestLocation from "../component/TestLocation"
 import Counter from "../component/TestCounter";
+import Ibeacons from "../ beacon"
 
 export default function App() {
   const statue = useSelector((state) => state.status);
@@ -15,6 +16,7 @@ export default function App() {
       <View style={styles.content}>
         <InfoBar />
         <TestLocation />
+        {/* <Ibeacons /> */}
         {/* <Counter /> */}
         <WarningsCircle statue={statue} />
         <WarningsTitle statue={statue} />

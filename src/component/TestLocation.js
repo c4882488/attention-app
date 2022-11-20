@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { Platform, Text, View, StyleSheet,TouchableOpacity } from 'react-native';
+import { Platform, Text, View, StyleSheet } from 'react-native';
 import * as Location from 'expo-location';
 import * as TaskManager from "expo-task-manager";
 import {getFlatternDistance} from '../unit/LonLatTransform';
@@ -252,9 +252,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={onPress}>
         <Text style={styles.paragraph}>{text}</Text>
-      </TouchableOpacity>
     </View>
   );
 }
