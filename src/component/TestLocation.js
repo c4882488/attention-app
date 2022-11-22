@@ -10,6 +10,7 @@ import {EspToWsg} from "../../src/unit/EpsToWgs";
 import useLocation from "../../src/unit/useLocation";
 import * as Speech from "expo-speech";
 import { changeStatus } from "../model/statusSlice";
+import { changeLocation } from "../model/phoneConnectSlice";
 import { statusColors } from "../../assets/colors/colors";
 import moment from "moment";
 import "moment-timezone";
@@ -53,11 +54,14 @@ export default function App() {
     // console.log("Location task ran");
     if (error) {
       setErrorMsg(error);
+      dispatch(changeLocation(-1));
       return;
     }
     if (data) {
       const { locations } = data;
       setLocation(locations);
+      //
+      dispatch(changeLocation(1));
     }
   });
 
@@ -76,26 +80,26 @@ export default function App() {
     };
   }, []);
 
-  const onPress = ()=>{
-    console.log(statue.title);
-    if (statue.title === "執行中...") {
-      dispatch(
-        changeStatus({
-          title: "注意路口行人",
-          color: statusColors.error,
-          img: 30,
-        })
-      );
-    } else {
-      dispatch(
-        changeStatus({
-          title: "執行中...",
-          color: statusColors.zeroState,
-          img: 0,
-        })
-      );
-    }
-  }
+  // const onPress = ()=>{
+  //   console.log(statue.title);
+  //   if (statue.title === "執行中...") {
+  //     dispatch(
+  //       changeStatus({
+  //         title: "注意路口行人",
+  //         color: statusColors.error,
+  //         img: 30,
+  //       })
+  //     );
+  //   } else {
+  //     dispatch(
+  //       changeStatus({
+  //         title: "執行中...",
+  //         color: statusColors.zeroState,
+  //         img: 0,
+  //       })
+  //     );
+  //   }
+  // }
 
   //經緯度判斷程式
   const checkLocationAPI = async () => {
@@ -181,13 +185,13 @@ export default function App() {
       });
   };
 
-  let text = "Waiting..";
-  if (errorMsg) {
-    text = errorMsg;
-  } else if (location) {
-    // text = JSON.stringify(location);
-    text = "connect success";
-  }
+  // let text = "Waiting..";
+  // if (errorMsg) {
+  //   text = errorMsg;
+  // } else if (location) {
+  //   // text = JSON.stringify(location);
+  //   text = "connect success";
+  // }
   useEffect(() => {
     if (location) {
       let lat = location[0]["coords"]["latitude"];
@@ -224,7 +228,8 @@ export default function App() {
             handleIntoChange(item);
             addActivitys(
               "危險路口",
-              "靠近" + item.city + item.crossRoadArea + item.rdname
+              "靠近" + item.city + item.crossRoadArea + item.rdname,
+              "warning"
             );
             dispatch(
               changeStatus({
@@ -249,9 +254,10 @@ export default function App() {
   }, [address]);
 
   return (
-    <View style={styles.container}>
-        <Text style={styles.paragraph}>{text}</Text>
-    </View>
+    <></>
+    // <View style={styles.container}>
+    //     <Text style={styles.paragraph}>{text}</Text>
+    // </View>
   );
 }
 

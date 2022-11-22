@@ -17,6 +17,10 @@ export const statusColors = {
     color: "#2C7BF6",
     circleColor: "#3E82D0",
   },
+  unconnect: {
+    color: "#BB0C56",
+    circleColor: "#D03E7C",
+  },
   warning: {
     color: "#F6F963",
     circleColor: "#F6F963",

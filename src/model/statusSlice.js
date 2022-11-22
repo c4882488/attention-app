@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    circleColor: "#DCD7D7",
-    circleSpeed:0.5,
-    color:"#FFFFFF",
-    title:"執行中...",
-    img:0,
-    otherImger:"",
+  circleColor: "#2C7BF6",
+  circleSpeed: 0.5,
+  color: "#3E82D0",
+  title: "連接中...",
+  img: 1,
+  otherImger: "",
 };
 
 export const statusSlice = createSlice({
