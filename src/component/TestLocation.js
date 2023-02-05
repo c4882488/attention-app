@@ -14,6 +14,7 @@ import { changeLocation } from "../model/phoneConnectSlice";
 import { statusColors } from "../../assets/colors/colors";
 import moment from "moment";
 import "moment-timezone";
+import { addActivitys } from "../../src/unit/AddActivitys";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -60,7 +61,6 @@ export default function App() {
     if (data) {
       const { locations } = data;
       setLocation(locations);
-      //
       dispatch(changeLocation(1));
     }
   });
@@ -151,48 +151,8 @@ export default function App() {
       });
   };
 
-  // TODO:ID還沒做修改
-  const addActivitys = (title, description) => {
-    moment.tz.guess();
-    moment.locale("zh-tw");
-    moment.tz.setDefault("Asia/Taipei");
-    // console.log(moment.locale("zh-tw"));
-
-    console.log(moment().format("YYYY-MM-DD hh:mm:ss"));
-    const PostData = {
-      title: title,
-      description: description,
-      time: moment().format("YYYY-MM-DD hh:mm:ss"),
-      status: "warning",
-      user_id: 1,
-    };
-    axios
-      .post(
-        "http://192.168.50.186/www/Project_back/public/api/activitys",
-        PostData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then(function (response) {
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        console.log(PostData);
-        console.log(error);
-      });
-  };
-
-  // let text = "Waiting..";
-  // if (errorMsg) {
-  //   text = errorMsg;
-  // } else if (location) {
-  //   // text = JSON.stringify(location);
-  //   text = "connect success";
-  // }
   useEffect(() => {
+    // TODO: errorMsg location
     if (location) {
       let lat = location[0]["coords"]["latitude"];
       let lon = location[0]["coords"]["longitude"];

@@ -86,7 +86,7 @@ function HomeDrawer() {
         <Text style={styles.drawerItemText}>儲存(no)</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() => {
           handleOpenTest();
         }}
@@ -96,7 +96,7 @@ function HomeDrawer() {
           <Flie black="#ffffff" />
         </View>
         <Text style={styles.drawerItemText}>測試</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <TouchableOpacity
         //   onPress={this.handleOpenMap}

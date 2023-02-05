@@ -28,11 +28,11 @@ export default function App() {
           img: 0,
         })
       );
-    }else{
+    }else if (phoneConnec.location != 0 && phoneConnec.mqtt != 0) {
       dispatch(
         changeStatus({
           title:
-            phoneConnec.location == 0
+            phoneConnec.location == -1 
               ? "連接失敗 code:i01"
               : "連接失敗 code:w01",
           color: statusColors.unconnect,

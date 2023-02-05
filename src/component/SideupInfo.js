@@ -1,11 +1,49 @@
-import React from 'react'
+import React, { useEffect } from "react";
 import { StyleSheet, } from "react-native";
 import { View, Text, TouchableOpacity, Image } from "react-native-ui-lib";
 import { Actions } from "react-native-router-flux";
 import ExecutionListItem from './ExecutionListItem';
 import FilesListItem from './FilesListItem';
+import moment from "moment";
+import axios from "axios";
 
 function SideupInfo() {
+
+  const [data, setData] = React.useState({});
+
+  // TODO:ID還沒做修改
+  const getUserActivities = () => {
+    axios
+      .get(
+        "http://192.168.137.239/www/Project_back/public/api/activitys?filters=user_id:1&limit=6&date=" +
+          moment(new Date()).format("YYYY-MM-DD") +
+          "," +
+          moment(new Date()).format("YYYY-MM-DD"),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then(function (response) {
+        // console.log(response.data.data);
+        if (response.data.data.data.length > 0) {
+          // console.log(response.data.data.data.length);
+          setData(response.data.data);
+          console.log(response.data.data);
+        } else {
+          setData({});
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getUserActivities();
+  }, []);
+
   return (
     <>
       <View style={styles.sideUpContent}>
@@ -21,53 +59,26 @@ function SideupInfo() {
           </TouchableOpacity>
         </View>
         <View style={styles.contentList}>
-          <ExecutionListItem
-            data={{
-              status: "zeroState",
-              time: "2022-09-19 18:30:00",
-              title: "開始執行",
-            }}
-          />
+          {Object.keys(data).length === 0 && (
+            <Text style={[styles.whiteText, styles.centerText]}>沒有紀錄</Text>
+          )}
 
-          <ExecutionListItem
-            data={{
-              status: "zeroState",
-              time: "2022-09-19 18:30:00",
-              title: "開始執行",
-            }}
-          />
+          {Object.keys(data).length > 0 &&
+            data.data.map((itemData) => (
+              <ExecutionListItem
+                key={itemData.id}
+                id={itemData.id}
+                data={itemData}
+              />
+            ))}
 
-          <ExecutionListItem
+          {/* <ExecutionListItem
             data={{
               status: "zeroState",
               time: "2022-09-19 18:30:00",
               title: "開始執行",
             }}
-          />
-
-          <ExecutionListItem
-            data={{
-              status: "zeroState",
-              time: "2022-09-19 18:30:00",
-              title: "開始執行",
-            }}
-          />
-
-          <ExecutionListItem
-            data={{
-              status: "zeroState",
-              time: "2022-09-19 18:30:00",
-              title: "開始執行",
-            }}
-          />
-
-          <ExecutionListItem
-            data={{
-              status: "zeroState",
-              time: "2022-09-19 18:30:00",
-              title: "開始執行",
-            }}
-          />
+          /> */}
         </View>
       </View>
 

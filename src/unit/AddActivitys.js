@@ -1,3 +1,6 @@
+import moment from "moment";
+import "moment-timezone";
+import axios from "axios";
 // TODO:ID還沒做修改
 
 export const addActivitys = (title, description, status) => {
@@ -6,7 +9,7 @@ export const addActivitys = (title, description, status) => {
   moment.tz.setDefault("Asia/Taipei");
   // console.log(moment.locale("zh-tw"));
 
-  console.log(moment().format("YYYY-MM-DD hh:mm:ss"));
+//   console.log(moment().format("YYYY-MM-DD hh:mm:ss"));
   const PostData = {
     title: title,
     description: description,
@@ -16,7 +19,7 @@ export const addActivitys = (title, description, status) => {
   };
   axios
     .post(
-      "http://192.168.50.186/www/Project_back/public/api/activitys",
+      "http://192.168.137.239/www/Project_back/public/api/activitys",
       PostData,
       {
         headers: {
@@ -25,10 +28,10 @@ export const addActivitys = (title, description, status) => {
       }
     )
     .then(function (response) {
-      console.log(response.data);
+      console.log("sucessful response");
+      //   console.log(response.data);
     })
     .catch(function (error) {
-      console.log(PostData);
       console.log(error);
     });
 };

@@ -49,7 +49,7 @@ function Records() {
   const getUserActivities = () =>{
     axios
       .get(
-        "http://192.168.50.186/www/Project_back/public/api/activitys?filters=user_id:1&date=" +
+        "http://192.168.137.239/www/Project_back/public/api/activitys?filters=user_id:1&date=" +
           moment(newUser.birthday).format("YYYY-MM-DD") +
           "," +
           moment(newUser.birthday).format("YYYY-MM-DD"),
@@ -66,7 +66,7 @@ function Records() {
           setData(response.data.data);
         } else {
           setData({});
-        }   
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -114,7 +114,11 @@ function Records() {
 
         {Object.keys(data).length > 0 &&
           data.data.map((itemData) => (
-            <ExecutionListItem id={itemData.id} data={itemData} />
+            <ExecutionListItem
+              key={itemData.id}
+              id={itemData.id}
+              data={itemData}
+            />
           ))}
       </ScrollView>
     </View>

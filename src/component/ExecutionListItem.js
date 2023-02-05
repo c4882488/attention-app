@@ -1,13 +1,15 @@
 import React from 'react'
 import { StyleSheet } from "react-native";
 import { View, Text } from "react-native-ui-lib";
+import { statusColors } from "../../assets/colors/colors";
 
 function ExecutionListItem(props) {
   const { status, time, title } = props.data;
+  const color = statusColors[status].color;
     return (
       <View style={styles.contentListItem}>
         <View
-          style={[styles.contentListItemColor, { backgroundColor: "#FF3636" }]}
+          style={[styles.contentListItemColor, { backgroundColor: color }]}
         ></View>
         <Text style={styles.contentListItemTitle}>{title}</Text>
         <Text style={styles.contentListItemContent}>{time}</Text>
